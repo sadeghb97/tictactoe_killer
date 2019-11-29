@@ -1,4 +1,3 @@
-import java.util.Scanner;
 
 public class Main {
 
@@ -37,21 +36,27 @@ public class Main {
                 }
                 else {
                     System.out.print("Enter your move: ");
-                    int choice = SBProScanner.inputInt(1, 9);
-                    choice--;
+                    Node newNode = null;
+                    while(newNode == null){
+                        int choice = SBProScanner.inputInt(1, 9);
+                        choice--;
+                        newNode = currentNode.getNextMinMode(choice);
+                        if(newNode == null)
+                            System.out.print("Wrong choice! Please enter a new move: ");
+                    }
+                    currentNode = newNode;
                     System.out.println("\nYour Turn: ");
-                    currentNode = currentNode.getNextMinMode(choice);
                 }
                 currentNode.print();
                 System.out.println();
             }
 
             int whoIsWinner = currentNode.whoIsWinner();
-            if(whoIsWinner == Node.MY_SYMBOLE){
+            if(whoIsWinner == Node.MY_SYMBOL){
                 StylishPrinter.println("Sorry I win :)",
                         StylishPrinter.BOLD_WHITE, StylishPrinter.BG_GREEN);
             }
-            else if(whoIsWinner == Node.OPPONENT_SYMBOLE){
+            else if(whoIsWinner == Node.OPPONENT_SYMBOL){
                 StylishPrinter.println("Ooops You are the winner :(",
                         StylishPrinter.BOLD_WHITE, StylishPrinter.BG_RED);
             }
